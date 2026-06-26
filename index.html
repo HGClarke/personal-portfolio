@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Holland Clarke — Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg: #F4F2EC;
+      --card: #FBFAF6;
+      --chip: #F0EEE6;
+      --grid: #E9E6DC;
+      --line: #E4E1D7;
+      --line2: #C9C5B8;
+      --ink: #17171A;
+      --ink2: #3C3A34;
+      --muted2: #54524B;
+      --muted: #76746C;
+      --faint: #A9A498;
+      --header-bg: rgba(244, 242, 236, 0.82);
+      --accent: #2742F0;
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #141417;
+      --card: #1C1C20;
+      --chip: #26262C;
+      --grid: #26262C;
+      --line: #2C2C32;
+      --line2: #3A3A42;
+      --ink: #ECEAE3;
+      --ink2: #CFCDC4;
+      --muted2: #B7B5AC;
+      --muted: #94928A;
+      --faint: #6E6C64;
+      --header-bg: rgba(20, 20, 23, 0.82);
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'IBM Plex Mono', monospace;
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    ::selection { background: var(--accent); color: #fff; }
+    a { color: inherit; }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
+    }
+    @keyframes dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    #page {
+      min-height: 100vh;
+      color: var(--ink);
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 64px 64px;
+      background-position: center top;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Nav hover */
+    .nav-link { transition: color 0.15s; }
+    .nav-link:hover { color: var(--ink) !important; }
+
+    .btn-theme { transition: border-color 0.15s, color 0.15s; }
+    .btn-theme:hover { border-color: var(--accent) !important; color: var(--accent) !important; }
+
+    .btn-resume { transition: border-color 0.15s, color 0.15s; }
+    .btn-resume:hover { border-color: var(--accent) !important; color: var(--accent) !important; }
+
+    /* Terminal chip hover */
+    .chip { transition: all 0.15s; }
+    .chip:hover {
+      border-color: #4ADE80 !important;
+      color: #fff !important;
+      background: #2A2A30 !important;
+    }
+
+    /* Contact hovers */
+    .contact-email { transition: background 0.15s; }
+    .contact-email:hover { background: var(--accent) !important; }
+
+    .contact-github, .contact-resume { transition: border-color 0.15s, color 0.15s; }
+    .contact-github:hover, .contact-resume:hover {
+      border-color: var(--accent) !important;
+      color: var(--accent) !important;
+    }
+  </style>
+</head>
+<body>
+<div id="page">
+
+  <!-- HEADER -->
+  <header style="position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(8px); background:var(--header-bg); border-bottom:1px solid var(--line);">
+    <div style="max-width:1080px; margin:0 auto; padding:16px 28px; display:flex; align-items:center; justify-content:space-between; gap:20px;">
+      <a href="#top" style="text-decoration:none; font-weight:600; font-size:15px; letter-spacing:-0.01em; display:flex; align-items:center; gap:10px;">
+        <span style="width:9px; height:9px; border-radius:50%; background:#16A34A; animation:dot 1.6s ease-in-out infinite; box-shadow:0 0 0 3px rgba(22,163,74,0.15); flex-shrink:0;"></span>
+        Holland Clarke
+      </a>
+      <nav style="display:flex; align-items:center; gap:22px; font-size:13px; color:var(--muted);">
+        <a href="#work" class="nav-link" style="text-decoration:none;">work</a>
+        <a href="#stack" class="nav-link" style="text-decoration:none;">stack</a>
+        <a href="#contact" class="nav-link" style="text-decoration:none;">contact</a>
+        <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark mode" class="btn-theme" style="font-family:'IBM Plex Mono',monospace; cursor:pointer; background:transparent; border:1px solid var(--line2); color:var(--ink); width:32px; height:32px; border-radius:6px; display:inline-flex; align-items:center; justify-content:center; font-size:14px; line-height:1; padding:0;">☾</button>
+        <a href="Holland_Clarke_Resume.pdf" target="_blank" rel="noopener" class="btn-resume" style="text-decoration:none; color:var(--ink); border:1px solid var(--line2); padding:7px 13px; border-radius:6px; display:inline-flex; align-items:center; gap:6px; white-space:nowrap;">resume ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="top" style="max-width:1080px; margin:0 auto; padding:clamp(60px,9vw,120px) 28px clamp(40px,5vw,64px);">
+    <div style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:26px;">// backend engineer</div>
+    <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(40px,6.4vw,78px); line-height:1.02; letter-spacing:-0.03em; margin:0 0 28px; max-width:15ch;">
+      I build backend systems that <span style="color:var(--accent);">remove bottlenecks.</span>
+    </h1>
+    <p style="font-size:clamp(15px,1.6vw,18px); line-height:1.7; color:var(--muted2); max-width:60ch; margin:0 0 36px;">
+      Backend engineer with full-stack experience. I design and ship the systems and automation that eliminate operational bottlenecks and make complex processes run more efficiently. Over five years at Amazon, that work has cut thousands of manual hours and saved millions of dollars in expenses.
+    </p>
+    <div style="display:flex; flex-wrap:wrap; gap:10px 22px; font-size:13px; color:var(--muted);">
+      <span style="display:flex; align-items:center; gap:8px;"><span style="color:var(--accent);">▸</span> Amazon · 2021–2026</span>
+      <span style="display:flex; align-items:center; gap:8px;"><span style="color:var(--accent);">▸</span> SDE II</span>
+      <span style="display:flex; align-items:center; gap:8px;"><span style="color:var(--accent);">▸</span> San Jose, CA</span>
+      <span style="display:flex; align-items:center; gap:8px;"><span style="color:#16A34A;">●</span> Open to new roles</span>
+    </div>
+  </section>
+
+  <!-- TERMINAL -->
+  <section style="max-width:1080px; margin:0 auto; padding:clamp(20px,3vw,32px) 28px clamp(60px,8vw,100px);">
+    <div style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:18px;">// 00 — ask me anything</div>
+    <div style="border-radius:14px; overflow:hidden; box-shadow:0 24px 60px -28px rgba(17,17,26,0.55), 0 2px 8px rgba(17,17,26,0.12); border:1px solid #1F1F24;">
+      <!-- title bar -->
+      <div style="background:#1A1A1E; display:flex; align-items:center; gap:14px; padding:13px 16px; border-bottom:1px solid #2A2A30;">
+        <div style="display:flex; gap:8px;">
+          <span style="width:12px; height:12px; border-radius:50%; background:#FF5F57;"></span>
+          <span style="width:12px; height:12px; border-radius:50%; background:#FEBC2E;"></span>
+          <span style="width:12px; height:12px; border-radius:50%; background:#28C840;"></span>
+        </div>
+        <span style="color:#8A8A92; font-size:12.5px; letter-spacing:0.02em;">holland@portfolio — zsh — 80×24</span>
+      </div>
+      <!-- body -->
+      <div style="background:#111113; color:#E8E8EA; padding:clamp(20px,3vw,30px); font-size:14.5px; line-height:1.75; min-height:188px;">
+        <div style="color:#8A8A92;"><span style="color:#4ADE80;">➜</span> <span style="color:#5EC8FF;">~/portfolio</span> <span style="color:#8A8A92;">git:(</span><span style="color:#FEBC2E;">main</span><span style="color:#8A8A92;">)</span></div>
+        <!-- idle -->
+        <div id="terminal-idle" style="margin-top:10px; color:#6E6E76;">
+          <span style="color:#4ADE80;">$</span>
+          <span style="display:inline-block; width:8px; height:1.05em; background:#4ADE80; vertical-align:text-bottom; animation:blink 1.05s step-end infinite; margin-left:4px;"></span>
+          <span style="color:#5A5A62; margin-left:8px;"># pick a question below ↓</span>
+        </div>
+        <!-- active (hidden initially) -->
+        <div id="terminal-active" style="display:none;">
+          <div style="margin-top:10px;"><span style="color:#4ADE80;">$</span> <span id="terminal-q" style="color:#E8E8EA;"></span></div>
+          <div style="margin-top:14px; color:#C8C8CE; white-space:pre-wrap;"><span id="terminal-typed"></span><span style="display:inline-block; width:8px; height:1.05em; background:#4ADE80; vertical-align:text-bottom; margin-left:2px; animation:blink 1.05s step-end infinite;"></span></div>
+        </div>
+      </div>
+      <!-- chips -->
+      <div style="background:#161619; padding:16px; border-top:1px solid #2A2A30; display:flex; flex-wrap:wrap; gap:10px;">
+        <button class="chip" onclick="ask('build')" style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#D4D4D8; background:#222227; border:1px solid #34343C; padding:9px 14px; border-radius:999px; cursor:pointer;">What do you actually build?</button>
+        <button class="chip" onclick="ask('stack')" style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#D4D4D8; background:#222227; border:1px solid #34343C; padding:9px 14px; border-radius:999px; cursor:pointer;">What's your stack?</button>
+        <button class="chip" onclick="ask('history')" style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#D4D4D8; background:#222227; border:1px solid #34343C; padding:9px 14px; border-radius:999px; cursor:pointer;">Where have you worked?</button>
+        <button class="chip" onclick="ask('reach')" style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#D4D4D8; background:#222227; border:1px solid #34343C; padding:9px 14px; border-radius:999px; cursor:pointer;">How do I reach you?</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section style="max-width:1080px; margin:0 auto; padding:clamp(56px,7vw,90px) 28px clamp(8px,1.5vw,16px);">
+    <div style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:42px;">// 01 — education</div>
+    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:18px 26px; background:var(--card); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:12px; padding:26px 28px;">
+      <div style="font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); flex:0 0 auto;">Degree</div>
+      <div style="flex:1 1 300px; min-width:240px;">
+        <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(21px,2.6vw,30px); letter-spacing:-0.015em; line-height:1.1; color:var(--ink);">B.S. Computer &amp; Information Science</div>
+        <div style="font-size:13px; color:var(--muted); margin-top:8px;">The Ohio State University · 2016–2020 · Columbus, OH</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" style="max-width:1080px; margin:0 auto; padding:clamp(64px,8vw,110px) 28px clamp(40px,5vw,60px);">
+    <div style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:42px;">// 02 — selected work</div>
+
+    <!-- SDE II -->
+    <div style="display:flex; flex-wrap:wrap; gap:28px 48px; padding-bottom:clamp(40px,5vw,60px); margin-bottom:clamp(40px,5vw,60px); border-bottom:1px solid var(--line);">
+      <div style="flex:1 1 240px; min-width:200px;">
+        <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:23px; letter-spacing:-0.01em; margin:0 0 6px;">Amazon</h3>
+        <div style="font-size:14px; color:var(--accent); margin-bottom:14px;">Software Development Engineer II</div>
+        <div style="font-size:12.5px; color:var(--muted); line-height:1.7;">Apr 2023 – Apr 2026<br>San Jose, CA</div>
+      </div>
+      <div style="flex:3 1 380px; min-width:300px; display:flex; flex-direction:column; gap:20px;">
+        <div style="display:flex; gap:14px;">
+          <span style="color:var(--accent); flex-shrink:0;">∠</span>
+          <p style="margin:0; font-size:14.5px; line-height:1.7; color:var(--ink2);">Helped grow a multi-tenant <strong style="color:var(--ink); font-weight:600;">LLM platform</strong> for risk assessment and investigations — internal data, custom prompts, multiple model providers — contributing to <strong style="color:var(--ink); font-weight:600;">$100M+ in cost savings</strong>.</p>
+        </div>
+        <div style="display:flex; gap:14px;">
+          <span style="color:var(--accent); flex-shrink:0;">∠</span>
+          <p style="margin:0; font-size:14.5px; line-height:1.7; color:var(--ink2);">Launched an ad-hoc enforcement platform: <strong style="color:var(--ink); font-weight:600;">236.3M listings removed</strong>, 482.1K automated notifications, and <strong style="color:var(--ink); font-weight:600;">$4.6M</strong> in counterfeit losses prevented.</p>
+        </div>
+        <div style="display:flex; gap:14px;">
+          <span style="color:var(--accent); flex-shrink:0;">∠</span>
+          <p style="margin:0; font-size:14.5px; line-height:1.7; color:var(--ink2);">Shipped an ML pipeline classifying counterfeit complaints, moving monthly offline work to a weekly production system and cutting <strong style="color:var(--ink); font-weight:600;">1,700+ hours</strong> of manual effort a year.</p>
+        </div>
+        <div style="display:flex; gap:14px;">
+          <span style="color:var(--accent); flex-shrink:0;">∠</span>
+          <p style="margin:0; font-size:14.5px; line-height:1.7; color:var(--ink2);">Built an ML-driven Decision Optimization Engine — <strong style="color:var(--ink); font-weight:600;">6× detection accuracy</strong>, rule complexity from 250+ down to 20, and 79% fewer actions at equal impact.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SDE I -->
+    <div style="display:flex; flex-wrap:wrap; gap:28px 48px;">
+      <div style="flex:1 1 240px; min-width:200px;">
+        <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:23px; letter-spacing:-0.01em; margin:0 0 6px;">Amazon</h3>
+        <div style="font-size:14px; color:var(--accent); margin-bottom:14px;">Software Development Engineer</div>
+        <div style="font-size:12.5px; color:var(--muted); line-height:1.7;">Apr 2021 – Apr 2023<br>San Jose, CA</div>
+      </div>
+      <div style="flex:3 1 380px; min-width:300px; display:flex; flex-direction:column; gap:20px;">
+        <div style="display:flex; gap:14px;">
+          <span style="color:var(--accent); flex-shrink:0;">∠</span>
+          <p style="margin:0; font-size:14.5px; line-height:1.7; color:var(--ink2);">Built automation surfacing risk signals in guided workflows — reduced handling time by 90 seconds, touched <strong style="color:var(--ink); font-weight:600;">53% of appeals volume</strong>, and saved <strong style="color:var(--ink); font-weight:600;">$486K</strong> annually.</p>
+        </div>
+        <div style="display:flex; gap:14px;">
+          <span style="color:var(--accent); flex-shrink:0;">∠</span>
+          <p style="margin:0; font-size:14.5px; line-height:1.7; color:var(--ink2);">Rebuilt manual action workflows into unified automated systems — <strong style="color:var(--ink); font-weight:600;">80% fewer seller escalations</strong> and 5% fewer false positives.</p>
+        </div>
+        <div style="display:flex; gap:14px;">
+          <span style="color:var(--accent); flex-shrink:0;">∠</span>
+          <p style="margin:0; font-size:14.5px; line-height:1.7; color:var(--ink2);">Hardened systems through security certification and migrated legacy architectures to modern stacks — faster deploys, simpler testing, lower technical debt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section id="stack" style="max-width:1080px; margin:0 auto; padding:clamp(40px,5vw,60px) 28px clamp(64px,8vw,100px);">
+    <div style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:42px;">// 03 — stack</div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+      <div style="background:var(--card); padding:22px 18px;">
+        <div style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:16px;">Languages</div>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">Java</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">Python</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">Swift</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">TypeScript</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">Go</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">Ruby</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">SQL</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">Dart</span>
+        </div>
+      </div>
+      <div style="background:var(--card); padding:22px 18px;">
+        <div style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:16px;">Frameworks</div>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">React</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">Spring Boot</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">LangChain</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">FastAPI</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">Flutter</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">iOS</span>
+        </div>
+      </div>
+      <div style="background:var(--card); padding:22px 18px;">
+        <div style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:16px;">Cloud &amp; Infra</div>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">AWS</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">PostgreSQL</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">Redis</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">Firebase</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">Supabase</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">DuckDB</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">Vercel</span>
+        </div>
+      </div>
+      <div style="background:var(--card); padding:22px 18px;">
+        <div style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:16px;">AI</div>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">Claude</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">Cursor</span>
+        </div>
+      </div>
+      <div style="background:var(--card); padding:22px 18px;">
+        <div style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:16px;">Testing</div>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">JUnit</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">Pytest</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">Mockito</span>
+          <span style="font-size:13px; background:var(--chip); border:1px solid var(--line); padding:5px 11px; border-radius:6px;">TestNG</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" style="border-top:1px solid var(--line);">
+    <div style="max-width:1080px; margin:0 auto; padding:clamp(64px,9vw,120px) 28px;">
+      <div style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:26px;">// 04 — contact</div>
+      <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(32px,5vw,60px); letter-spacing:-0.03em; line-height:1.05; margin:0 0 36px; max-width:16ch; color:var(--ink);">Let's build something that ships.</h2>
+      <div style="display:flex; flex-wrap:wrap; gap:14px;">
+        <a href="mailto:hollandglenclarke@gmail.com" class="contact-email" style="text-decoration:none; color:var(--bg); background:var(--ink); padding:13px 20px; border-radius:8px; font-size:14px; display:inline-flex; align-items:center; gap:9px;">✉ hollandglenclarke@gmail.com</a>
+        <a href="https://github.com/hgclarke98" target="_blank" rel="noopener" class="contact-github" style="text-decoration:none; color:var(--ink); border:1px solid var(--line2); padding:13px 20px; border-radius:8px; font-size:14px; display:inline-flex; align-items:center; gap:9px;">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+          github / hgclarke98
+        </a>
+        <a href="Holland_Clarke_Resume.pdf" target="_blank" rel="noopener" class="contact-resume" style="text-decoration:none; color:var(--ink); border:1px solid var(--line2); padding:13px 20px; border-radius:8px; font-size:14px; display:inline-flex; align-items:center; gap:9px;">↓ resume.pdf</a>
+      </div>
+      <div style="margin-top:clamp(48px,7vw,90px); padding-top:24px; border-top:1px solid var(--line); display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:12px; color:var(--muted);">
+        <span>Holland Clarke — Software Engineer</span>
+        <span>San Jose, CA · 2026</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const qa = {
+    build: {
+      q: "What do you actually build?",
+      a: "Backend systems and automation that take the friction out of operational work — APIs, data pipelines, ML-driven decision engines, and the internal tooling around them. The throughline: find the bottleneck, design a system that removes it, and ship it to production."
+    },
+    stack: {
+      q: "What's your stack?",
+      a: "Languages: Java, Python, Swift, Go, TypeScript.\nFrameworks: React, Spring Boot, LangChain, FastAPI, Flutter.\nInfra: AWS, Postgres, Redis, Supabase, Vercel.\nDaily drivers: Claude + Cursor."
+    },
+    history: {
+      q: "Where have you worked?",
+      a: "Amazon, 2021–2026 in San Jose — promoted from SDE to SDE II. Before that, a B.S. in Computer & Information Science from The Ohio State University."
+    },
+    reach: {
+      q: "How do I reach you?",
+      a: "Email me at hollandglenclarke@gmail.com, or find me on GitHub @hgclarke98. My full resume is one click away at the top of the page."
+    }
+  };
+
+  let typingInterval = null;
+
+  function ask(id) {
+    const item = qa[id];
+    if (!item) return;
+    if (typingInterval) { clearInterval(typingInterval); typingInterval = null; }
+
+    document.getElementById('terminal-idle').style.display = 'none';
+    document.getElementById('terminal-active').style.display = 'block';
+    document.getElementById('terminal-q').textContent = item.q;
+    document.getElementById('terminal-typed').textContent = '';
+
+    const full = item.a;
+    let i = 0;
+    typingInterval = setInterval(() => {
+      i++;
+      document.getElementById('terminal-typed').textContent = full.slice(0, i);
+      if (i >= full.length) { clearInterval(typingInterval); typingInterval = null; }
+    }, 14);
+  }
+
+  function toggleTheme() {
+    const root = document.documentElement;
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    document.getElementById('theme-toggle').textContent = isDark ? '☾' : '☀';
+    try { localStorage.setItem('hc_portfolio_theme', isDark ? 'light' : 'dark'); } catch (e) {}
+  }
+
+  // Restore saved theme
+  (function () {
+    try {
+      if (localStorage.getItem('hc_portfolio_theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.getElementById('theme-toggle').textContent = '☀';
+      }
+    } catch (e) {}
+  })();
+</script>
+</body>
+</html>
